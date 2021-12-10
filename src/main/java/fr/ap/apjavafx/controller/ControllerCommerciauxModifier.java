@@ -57,12 +57,14 @@ public class ControllerCommerciauxModifier extends ControllerBase implements Ini
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        tbxNom.getScene();
     }
 
     @Override
     public void loaded() {
         CommercialDTO commercial = (CommercialDTO) getParam("COMMERCIAL");
+
+        setTitle("Modification de " + commercial.getNom() + " " + commercial.getPrenom());
+
         tbxNom.setText(commercial.getNom());
         tbxPrenom.setText(commercial.getPrenom());
         tbxMail.setText(commercial.getMail());

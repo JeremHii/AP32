@@ -22,6 +22,9 @@ public class ControllerCommerciauxSupprimer extends ControllerBase implements In
     @Override
     public void loaded() {
         CommercialDTO commercial = (CommercialDTO) getParam("COMMERCIAL");
+
+        setTitle("Suppression de " + commercial.getNom() + " " + commercial.getPrenom());
+
         lblCommercial.setText(commercial.getPrenom() + " " + commercial.getNom() + " ?");
     }
 

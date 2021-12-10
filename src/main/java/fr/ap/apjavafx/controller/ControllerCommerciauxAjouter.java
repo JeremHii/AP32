@@ -64,6 +64,6 @@ public class ControllerCommerciauxAjouter extends ControllerBase implements Init
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        setTitle("Ajouter un commercial");
     }
 }

@@ -5,6 +5,8 @@ import java.util.HashMap;
 public abstract class ControllerBase {
     private HashMap<String, Object> params = new HashMap<String, Object>();
 
+    private String title = "Titre";
+
     public void setParams(HashMap<String, Object> params){
         this.params = params;
     }
@@ -19,6 +21,14 @@ public abstract class ControllerBase {
 
     public HashMap<String, Object> getParams(){
         return params;
+    }
+
+    public String getTitle() {
+        return "MeetingsBooker - " + title;
+    }
+
+    public void setTitle(String title){
+        this.title = title;
     }
 
     public void loaded(){

@@ -19,6 +19,7 @@ import java.sql.Array;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -50,12 +51,15 @@ public class ControllerIdentification extends ControllerBase implements Initiali
 		try {
 			if(rs.next()){
 				UtilisateurDTO utilisateur = UtilisateurDTO.getUtilisateur(loginTextField.getText());
-				if(utilisateur.getFonction().equals("ADMIN") || utilisateur.getLogin().equals("RESPONSABLE")){
+				HashMap<String, Object> params = new HashMap<String, Object>();
+				params.put("UTILISATEUR", utilisateur);
+				LoadScene.load(e, getClass().getResource("/fxml/view-menu.fxml"), params);
+				/*if(utilisateur.getFonction().equals("ADMIN") || utilisateur.getLogin().equals("RESPONSABLE")){
 					LoadScene.load(e, getClass().getResource("/fxml/view-commerciaux-liste.fxml"));
-				}
-				else{
-					messageConnexionLabel.setText("Vous n'avez pas la permission d'accèder à cette page.");
-				}
+				}*/
+			}
+			else{
+				messageConnexionLabel.setText("Vous n'avez pas la permission d'accèder à cette page.");
 			}
 		} catch (SQLException | IOException throwables) {
 			throwables.printStackTrace();
@@ -78,6 +82,7 @@ public class ControllerIdentification extends ControllerBase implements Initiali
 	 ***/
 	@Override
 	public void initialize(URL location , ResourceBundle ressources) {
+		setTitle("Connexion");
 		loginTextField.setText("jeremy");
 		mdpPasswordField.setText("1234");
 	}

@@ -43,6 +43,7 @@ public class ControllerCommerciauxListe extends ControllerBase implements Initia
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setTitle("Liste des commerciaux");
 
         tabCommerciaux.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<CommercialDTO>() {
             @Override
@@ -70,12 +71,16 @@ public class ControllerCommerciauxListe extends ControllerBase implements Initia
     @FXML public void btnSupprimerClick(ActionEvent actionEvent) throws IOException {
         HashMap<String, Object> params = new HashMap<String, Object>();
         params.put("COMMERCIAL", commercialSelected);
-        LoadScene.load(actionEvent, getClass().getResource("/fxml/view-commerciaux-supprimer.fxml"), ControllerCommerciauxSupprimer.class, params);
+        LoadScene.load(actionEvent, getClass().getResource("/fxml/view-commerciaux-supprimer.fxml"), params);
     }
 
     @FXML public void btnModifierClick(ActionEvent actionEvent) throws IOException {
         HashMap<String, Object> params = new HashMap<String, Object>();
         params.put("COMMERCIAL", commercialSelected);
-        LoadScene.load(actionEvent, getClass().getResource("/fxml/view-commerciaux-modifier.fxml"), ControllerCommerciauxSupprimer.class, params);
+        LoadScene.load(actionEvent, getClass().getResource("/fxml/view-commerciaux-modifier.fxml"), params);
+    }
+
+    @FXML public void btnRetour(ActionEvent actionEvent) throws IOException {
+        LoadScene.load(actionEvent, getClass().getResource("/fxml/view-menu.fxml"));
     }
 }

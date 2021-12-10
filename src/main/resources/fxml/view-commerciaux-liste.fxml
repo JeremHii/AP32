@@ -35,5 +35,6 @@
       </ImageView>
       <Button fx:id="btnSupprimer" disable="true" layoutX="609.0" layoutY="339.0" mnemonicParsing="false" onAction="#btnSupprimerClick" prefHeight="46.0" prefWidth="113.0" text="Supprimer" />
       <Button fx:id="btnModifier" disable="true" layoutX="482.0" layoutY="339.0" mnemonicParsing="false" onAction="#btnModifierClick" prefHeight="46.0" prefWidth="113.0" text="Modifier" />
+      <Button layoutX="22.0" layoutY="397.0" mnemonicParsing="false" onAction="#btnRetour" prefHeight="46.0" prefWidth="346.0" text="Retour vers le menu" />
    </children>
 </Pane>

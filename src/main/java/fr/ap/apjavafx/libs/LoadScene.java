@@ -18,15 +18,16 @@ import java.util.List;
 
 public class LoadScene {
     public static void load(ActionEvent e, URL resource) throws IOException {
-        load(e, resource, null, null);
+        load(e, resource, null);
     }
 
-    public static <T extends ControllerBase> List<T> load(ActionEvent e, URL resource, Class<T> controllerClass, HashMap<String, Object> params) throws IOException {
+    public static <T extends ControllerBase> List<T> load(ActionEvent e, URL resource, HashMap<String, Object> params) throws IOException {
         FXMLLoader loader = new FXMLLoader(resource);
         Parent root = (Parent) loader.load();
 
-        if(controllerClass != null){
-            T controller = loader.<T>getController();
+        T controller = loader.<T>getController();
+
+        if(params != null){
             controller.setParams(params);
             controller.loaded();
         }
@@ -34,6 +35,7 @@ public class LoadScene {
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.setTitle(controller.getTitle());
         stage.show();
 
         return null;
