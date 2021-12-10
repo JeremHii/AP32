@@ -73,6 +73,9 @@ public class ControllerCommerciauxListe extends ControllerBase implements Initia
         LoadScene.load(actionEvent, getClass().getResource("/fxml/view-commerciaux-supprimer.fxml"), ControllerCommerciauxSupprimer.class, params);
     }
 
-    @FXML public void btnModifierClick(ActionEvent actionEvent) {
+    @FXML public void btnModifierClick(ActionEvent actionEvent) throws IOException {
+        HashMap<String, Object> params = new HashMap<String, Object>();
+        params.put("COMMERCIAL", commercialSelected);
+        LoadScene.load(actionEvent, getClass().getResource("/fxml/view-commerciaux-modifier.fxml"), ControllerCommerciauxSupprimer.class, params);
     }
 }

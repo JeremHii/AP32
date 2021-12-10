@@ -57,4 +57,26 @@ public class CommercialDAO {
 
 		return res;
 	}
+
+	public static int updateCommercial(CommercialDTO commercial){
+		String requete = "UPDATE Commercial SET NOM = ?, PRENOM = ?, ADRESSE = ?, TELEPHONE = ?, MAIL = ?, POURCENTINTERESSEMENT = ? WHERE LOGIN = ?;";
+		Connection conn = DBConnex.getConn();
+		int res = -1;
+		try {
+			res = DBConnex.noQuery(conn, requete, List.of(commercial.getNom(), commercial.getPrenom(), commercial.getAdresse(), commercial.getTelephone(), commercial.getMail(), commercial.getPourcentinteressement(), commercial.getLogin()));
+		}
+		catch (Exception e){}
+
+		if(res == -1){
+			System.out.println("Erreur lors de la requête (updateCommercial).");
+		}
+
+		try {
+			conn.close();
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+
+		return res;
+	}
 }
