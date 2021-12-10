@@ -1,103 +1,113 @@
 package fr.ap.apjavafx.model.DAO;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 public class DBConnex {
 	/**
 	 * M�thode de connexion � la base de donn�es
 	 * @return  Statement
 	 */
-	public static Statement connexion() {
-		
-		Statement statement = null;
-		 try {
-				Connection	connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/gsb?user=phpmya&password=M?ysql22");
-			
-				statement = connection.createStatement();
-				
-				
-				return statement;
-				
-		    } catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();	
-				System.out.println(e.getMessage()); 
-				return statement;
-			}
-	}
-	
-	/**
-	 * M�thode d'authentification des l'utilisteur
-	 * @param login
-	 * @param mdp
-	 * @param unStatement
-	 * @return ResultSet
-	 */
-	public static ResultSet  authentification(String login , String mdp, Statement unStatement) {
-		
-		ResultSet rs = null ;
-		try {
-			String sql ="SELECT id , nom , prenom, login, statut  FROM utilisateur where login = '" + login + "' and mdp = '"+ mdp +"'";
-			rs = unStatement.executeQuery(sql);
-			if (!rs.next()) {
-				rs =null;
-			}
-			
-		} catch (SQLException e) {
-				e.printStackTrace();
-				System.out.println(e.getMessage()); 
+
+	public static Connection getConn(){
+		try{
+			return DriverManager.getConnection("jdbc:mysql://10.100.0.5:3306/jdelmas_ap32","jdelmas","jdelmas");
+		}catch (SQLException e){
+			e.printStackTrace();
 		}
-		 return rs;
+		return null;
 	}
-	
-	
+
 	/**
-	 * M�thode permettant l'envoi de requ�tes "select" � la base de donn�es
+	 * Méthode permettant l'envoi de requetes "select" à la base de données
+	 * @param conn
 	 * @param requete
-	 * @param unStatement
 	 * @return ResultSet
 	 */
-	public static ResultSet  getRS(String requete ,Statement unStatement) {
-		
-		ResultSet rs = null ;
-		 try {
-				rs = unStatement.executeQuery(requete);		
-				if (!rs.next()) {
-					rs =null;
+	public static ResultSet getRS(Connection conn, String requete){
+		return getRS(conn, requete, null);
+	}
+
+	/**
+	 * Méthode permettant l'envoi de requetes "select" à la base de données
+	 * @param conn
+	 * @param requete
+	 * @param elements Remplacer les "?" dans la requête
+	 * @return ResultSet
+	 */
+	public static ResultSet getRS(Connection conn, String requete, List<Object> elements ){
+		ResultSet rs = null;
+		try{
+			PreparedStatement ps = conn.prepareStatement(requete);
+
+			if(elements != null){
+				int i = 0;
+				for(Object elem : elements){
+					i++;
+					if(elem instanceof Integer){
+						ps.setInt(i, (Integer) elem);
+					}
+					else{
+						ps.setString(i, (String) elem);
+					}
 				}
-								
-		    } catch (SQLException e) {
-				e.printStackTrace();
-				System.out.println(e.getMessage()); 
-				
 			}
-		 return rs;
+
+			rs = ps.executeQuery();
+		}catch (SQLException e){
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		return rs;
 	}
 	
 	/**
 	  * M�thode permettant l'envoi de requ�tes "update, insert, delete" � la base de donn�es
+	 * @param conn
 	 * @param requete
-	 * @param unStatement
 	 * @return Integer
 	 */
-	public static Integer  noQuery(String requete ,Statement unStatement) {
-		
-		Integer reponse = -1 ;
-		 try {
-				reponse  = unStatement.executeUpdate(requete);		
-				
-								
-		    } catch (SQLException e) {
-				e.printStackTrace();
-				System.out.println(e.getMessage()); 
-				
-			}
-		 return reponse;
+	public static Integer noQuery(Connection conn, String requete){
+		return noQuery(conn, requete, null);
 	}
-	
+
+	/**
+	 * M�thode permettant l'envoi de requ�tes "update, insert, delete" � la base de donn�es
+	 * @param conn
+	 * @param requete
+	 * @param elements Remplacer les "?" dans la requête
+	 * @return Integer
+	 */
+	public static Integer noQuery(Connection conn, String requete, List<Object> elements ){
+		int res = -1;
+		try{
+			PreparedStatement ps = conn.prepareStatement(requete);
+
+			if(elements != null){
+				int i = 0;
+				for(Object elem : elements){
+					i++;
+					if(elem instanceof Integer){
+						ps.setInt(i, (Integer) elem);
+					}
+					else{
+						ps.setString(i, (String) elem);
+					}
+				}
+			}
+
+			res = ps.executeUpdate();
+		}catch (SQLException e){
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+
+
+		return res;
+	}
+
 
 }

@@ -1,27 +1,21 @@
 package fr.ap.apjavafx.model.DAO;
 
+import fr.ap.apjavafx.model.DTO.AdminDTO;
 import fr.ap.apjavafx.model.DTO.UtilisateurDTO;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.List;
 
-public class UtilisateurDAO {
+public class AdminDAO {
 
-	public static ResultSet getUserByCredentials(String login, String mdp){
-		String requete = "SELECT LOGIN FROM Utilisateur WHERE LOGIN = ? AND PASSWORD = ?;";
-		Connection conn = DBConnex.getConn();
-		ResultSet rs = DBConnex.getRS(conn, requete, List.of(login, mdp));
-		return rs;
-	}
-
-	public static void createUsers(){
-		String requete = "SELECT LOGIN FROM Utilisateur;";
+	public static void createAdmins(){
+		String requete = "SELECT * FROM Admin;";
 		Connection conn = DBConnex.getConn();
 		ResultSet rs = DBConnex.getRS(conn, requete);
 		try{
 			while(rs.next()){
-				new UtilisateurDTO(rs.getString("LOGIN"));
+				new AdminDTO(rs.getString("LOGIN"));
 			}
 		}catch (Exception e){
 		}

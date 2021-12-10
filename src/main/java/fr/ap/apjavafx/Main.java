@@ -1,6 +1,10 @@
 package fr.ap.apjavafx;
 
 
+import fr.ap.apjavafx.model.DAO.AdminDAO;
+import fr.ap.apjavafx.model.DAO.CommercialDAO;
+import fr.ap.apjavafx.model.DAO.ResponsableDAO;
+import fr.ap.apjavafx.model.DAO.UtilisateurDAO;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -26,6 +30,12 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			primaryStage.setTitle("GSB Gestion des frais - Compta Fiche de frais");
+
+			//Chargement des objets de la BDD
+			AdminDAO.createAdmins();
+			ResponsableDAO.createResponsables();
+			UtilisateurDAO.createUsers();
+			CommercialDAO.createCommerciaux();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

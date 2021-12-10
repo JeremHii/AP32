@@ -1,14 +1,25 @@
 package fr.ap.apjavafx.controller;
 
 import fr.ap.apjavafx.Main;
-import fr.ap.apjavafx.model.DAO.DBConnex;
+import fr.ap.apjavafx.libs.LoadScene;
+import fr.ap.apjavafx.model.DAO.*;
+import fr.ap.apjavafx.model.DTO.UtilisateurDTO;
+import javafx.event.Event;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+
+import java.io.IOException;
 import java.net.URL;
+import java.sql.Array;
+import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -18,15 +29,13 @@ import javafx.fxml.Initializable;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class ControllerIdentification implements Initializable {
+public class ControllerIdentification extends ControllerBase implements Initializable {
 	
 
 	/**
 	 * Les variables du fichier FXML associ�
 	 */
 	@FXML private Label messageConnexionLabel;
-	@FXML private TextField serveurTextField;
-	@FXML private TextField portTextField;
 	@FXML private TextField loginTextField;
 	@FXML private PasswordField mdpPasswordField;
 	
@@ -36,49 +45,21 @@ public class ControllerIdentification implements Initializable {
 	 * @param e
 	 */
 	@FXML	protected void buttonValiderIdentificationClick(ActionEvent e) {
-			
-		//Appel de la m�tode statique authentification de la classe DBConnex
-		//En param�tre le login et mdp saisis et la d�claration de connexion.
-		//Le ResultSet r�cup�re la r�ponse du serveur SGBD.
-		ResultSet rs = DBConnex.authentification(loginTextField.getText() , mdpPasswordField.getText(), DBConnex.connexion() );
-		
-		
-		//Traitement de la r�ponse du SGBD
 		//Chargement des diff�rentes vues en fonction du statut de la personne authentifi�e.
+		ResultSet rs = UtilisateurDAO.getUserByCredentials(loginTextField.getText(), mdpPasswordField.getText());
 		try {
-	
-			if(rs != null) {
-				
-				
-			 FXMLLoader loader = new FXMLLoader();
-			 messageConnexionLabel.setText("");
-			 
-			 
-			 if(rs.getString("statut").equals("comptable")) {
-			 		loader.setLocation(Main.class.getResource("../view/view-comptable-liste-fiches.fxml"));
-			 		Pane comptableListeFichesLayout = (Pane) loader.load();
-	            	Stage comptableListeFichesStage = new Stage();
-			 		Scene comptableListeFichesScene = new Scene(comptableListeFichesLayout);
-			 		comptableListeFichesStage.setScene(comptableListeFichesScene);
-	           		
-			 		comptableListeFichesStage.setTitle("GSB Gestion des frais - Compta Fiche de frais");
-			 		comptableListeFichesStage.initModality(Modality.APPLICATION_MODAL);		 		
-			 		comptableListeFichesStage.show();
-			 	}   
+			if(rs.next()){
+				UtilisateurDTO utilisateur = UtilisateurDTO.getUtilisateur(loginTextField.getText());
+				if(utilisateur.getFonction().equals("ADMIN") || utilisateur.getLogin().equals("RESPONSABLE")){
+					LoadScene.load(e, getClass().getResource("/fxml/view-commerciaux-liste.fxml"));
+				}
+				else{
+					messageConnexionLabel.setText("Vous n'avez pas la permission d'accèder à cette page.");
+				}
 			}
-			else {
-				messageConnexionLabel.setText("Login ou mot de passe incorrect !");
-			}
-			
-
-    
-		
-			
-			}catch(Exception e1) {
-			e1.printStackTrace();
+		} catch (SQLException | IOException throwables) {
+			throwables.printStackTrace();
 		}
-		
-			
 	}
 
 	/**
@@ -97,8 +78,8 @@ public class ControllerIdentification implements Initializable {
 	 ***/
 	@Override
 	public void initialize(URL location , ResourceBundle ressources) {
-		serveurTextField.setText("127.0.0.1");
-		portTextField.setText("3306");
+		loginTextField.setText("jeremy");
+		mdpPasswordField.setText("1234");
 	}
 	
 	

@@ -3,25 +3,25 @@ package fr.ap.apjavafx.model.DTO;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminDTO {
-    private static List<AdminDTO> admins = new ArrayList<>();
+public class ResponsableDTO {
+    private static List<ResponsableDTO> responsables = new ArrayList<>();
     private String login;
 
-    public AdminDTO(String login)
+    public ResponsableDTO(String login)
     {
-        admins.add(this);
+        responsables.add(this);
 
         this.login = login;
     }
 
-    public static List<AdminDTO> getAdmins(){
-        return admins;
+    public static List<ResponsableDTO> getResponsables(){
+        return responsables;
     }
 
-    public static AdminDTO getAdmin(String login){
-        for (AdminDTO admin : getAdmins()) {
-            if(admin.getLogin().equals(login)){
-                return admin;
+    public static ResponsableDTO getResponsable(String login){
+        for (ResponsableDTO responsable : getResponsables()) {
+            if(responsable.getLogin().equals(login)){
+                return responsable;
             }
         }
         return null;

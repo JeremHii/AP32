@@ -1,2 +1,41 @@
-package fr.ap.apjavafx.libs;public class LoadScene {
+package fr.ap.apjavafx.libs;
+
+import fr.ap.apjavafx.controller.ControllerBase;
+import fr.ap.apjavafx.controller.ControllerCommerciauxSupprimer;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+
+import javax.xml.transform.Source;
+import java.io.IOException;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
+
+public class LoadScene {
+    public static void load(ActionEvent e, URL resource) throws IOException {
+        load(e, resource, null, null);
+    }
+
+    public static <T extends ControllerBase> List<T> load(ActionEvent e, URL resource, Class<T> controllerClass, HashMap<String, Object> params) throws IOException {
+        FXMLLoader loader = new FXMLLoader(resource);
+        Parent root = (Parent) loader.load();
+
+        if(controllerClass != null){
+            T controller = loader.<T>getController();
+            controller.setParams(params);
+            controller.loaded();
+        }
+
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+        return null;
+    }
 }

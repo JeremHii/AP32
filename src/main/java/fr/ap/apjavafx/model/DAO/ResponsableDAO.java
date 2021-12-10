@@ -1,21 +1,20 @@
 package fr.ap.apjavafx.model.DAO;
 
 import fr.ap.apjavafx.model.DTO.AdminDTO;
-import fr.ap.apjavafx.model.DTO.UtilisateurDTO;
+import fr.ap.apjavafx.model.DTO.ResponsableDTO;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.util.List;
 
-public class AdminDAO {
+public class ResponsableDAO {
 
-	public static void createAdmins(){
-		String requete = "SELECT * FROM Admin;";
+	public static void createResponsables(){
+		String requete = "SELECT * FROM Responsable;";
 		Connection conn = DBConnex.getConn();
 		ResultSet rs = DBConnex.getRS(conn, requete);
 		try{
 			while(rs.next()){
-				new AdminDTO(rs.getString("LOGIN"));
+				new ResponsableDTO(rs.getString("LOGIN"));
 			}
 		}catch (Exception e){
 		}
