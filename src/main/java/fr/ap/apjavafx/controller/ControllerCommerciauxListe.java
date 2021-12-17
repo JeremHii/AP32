@@ -30,6 +30,7 @@ public class ControllerCommerciauxListe extends ControllerBase implements Initia
     @FXML private TableColumn<CommercialDTO, String> tcMail;
     @FXML private TableColumn<CommercialDTO, String> tcInteressement;
 
+    @FXML private Button btnDetails;
     @FXML private Button btnSupprimer;
     @FXML private Button btnModifier;
 
@@ -50,6 +51,7 @@ public class ControllerCommerciauxListe extends ControllerBase implements Initia
             public void changed(ObservableValue<? extends CommercialDTO> observable, CommercialDTO oldValue, CommercialDTO newValue) {
                 btnSupprimer.setDisable(false);
                 btnModifier.setDisable(false);
+                btnDetails.setDisable(false);
                 commercialSelected = newValue;
             }
         });
@@ -66,6 +68,12 @@ public class ControllerCommerciauxListe extends ControllerBase implements Initia
 
         tabCommerciaux.setItems(data);
 
+    }
+
+    @FXML public void btnDetailsClick(ActionEvent actionEvent) throws IOException {
+        HashMap<String, Object> params = new HashMap<String, Object>();
+        params.put("COMMERCIAL", commercialSelected);
+        LoadScene.load(actionEvent, getClass().getResource("/fxml/view-commerciaux-details.fxml"), params);
     }
 
     @FXML public void btnSupprimerClick(ActionEvent actionEvent) throws IOException {

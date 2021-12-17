@@ -28,13 +28,14 @@
         </columns>
       </TableView>
       <Button layoutX="22.0" layoutY="339.0" mnemonicParsing="false" onAction="#btnNewCommercial" prefHeight="46.0" prefWidth="346.0" text="Nouveau commercial" />
-      <ImageView fitHeight="76.0" fitWidth="237.0" layoutX="499.0" layoutY="412.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="76.0" fitWidth="237.0" layoutX="442.0" layoutY="411.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/mb.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="btnSupprimer" disable="true" layoutX="609.0" layoutY="339.0" mnemonicParsing="false" onAction="#btnSupprimerClick" prefHeight="46.0" prefWidth="113.0" text="Supprimer" />
-      <Button fx:id="btnModifier" disable="true" layoutX="482.0" layoutY="339.0" mnemonicParsing="false" onAction="#btnModifierClick" prefHeight="46.0" prefWidth="113.0" text="Modifier" />
+      <Button fx:id="btnSupprimer" disable="true" layoutX="618.0" layoutY="339.0" mnemonicParsing="false" onAction="#btnSupprimerClick" prefHeight="46.0" prefWidth="100.0" text="Supprimer" />
+      <Button fx:id="btnModifier" disable="true" layoutX="510.0" layoutY="339.0" mnemonicParsing="false" onAction="#btnModifierClick" prefHeight="46.0" prefWidth="100.0" text="Modifier" />
       <Button layoutX="22.0" layoutY="397.0" mnemonicParsing="false" onAction="#btnRetour" prefHeight="46.0" prefWidth="346.0" text="Retour vers le menu" />
+      <Button fx:id="btnDetails" disable="true" layoutX="399.0" layoutY="339.0" mnemonicParsing="false" onAction="#btnDetailsClick" prefHeight="46.0" prefWidth="100.0" text="Détails" />
    </children>
 </Pane>

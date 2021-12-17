@@ -1,10 +1,7 @@
 package fr.ap.apjavafx;
 
 
-import fr.ap.apjavafx.model.DAO.AdminDAO;
-import fr.ap.apjavafx.model.DAO.CommercialDAO;
-import fr.ap.apjavafx.model.DAO.ResponsableDAO;
-import fr.ap.apjavafx.model.DAO.UtilisateurDAO;
+import fr.ap.apjavafx.model.DAO.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -23,19 +20,19 @@ public class Main extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource("/fxml/view-connexion.fxml"));
-			System.out.println(loader.getLocation());
 			rootLayout = loader.load();
 
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			primaryStage.setTitle("GSB Gestion des frais - Compta Fiche de frais");
+			primaryStage.setTitle("Connexion");
 
 			//Chargement des objets de la BDD
 			AdminDAO.createAdmins();
 			ResponsableDAO.createResponsables();
 			UtilisateurDAO.createUsers();
 			CommercialDAO.createCommerciaux();
+			ContacterDAO.createContacts();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
