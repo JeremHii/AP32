@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="548.0" prefWidth="1287.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.ap.apjavafx.controller.ControlleurGestionFicheClient">
+    <ImageView fitHeight="174.0" fitWidth="233.0" layoutX="701.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+       <!-- <Image url="@../image/gsb.png"/>-->
+    </ImageView>
+    <TableView fx:id="tableGestionFicheClient" layoutX="23.0" layoutY="17.0" prefHeight="452.0" prefWidth="1235.0">
+        <columns>
+            <TableColumn fx:id="colIdNomEntreprise" prefWidth="127.0" text="Nom de l’entreprise" />
+            <TableColumn fx:id="colIdAdresse" prefWidth="107.0" text="Adresse exacte" />
+            <TableColumn fx:id="colIdVillePays" editable="false" prefWidth="106.0" sortable="false" text="Ville/Pays" />
+         <TableColumn fx:id="colIdNumTel" prefWidth="178.0" text="Numéro de téléphone" />
+         <TableColumn fx:id="colIdNomPrenomDuContact" onEditStart="#colidMailEntreprise" prefWidth="108.0" text="Mail entreprise" />
+         <TableColumn fx:id="colIdNomPrenomDuContact" prefWidth="160.0" text="Nom/Prénom  du contact" />
+         <TableColumn fx:id="colIdEtatContact" prefWidth="91.20001220703125" text="Etat du Contact" />
+         <TableColumn fx:id="colIdAdresseContact" prefWidth="150.4000244140625" text="Adresse mail du contact " />
+         <TableColumn fx:id="colidNumTelContact" prefWidth="205.5999755859375" text="Numéro de téléphone du contact" />
+        </columns>
+    </TableView>
+   <Button fx:id="closeButtonGestionFicheClient" layoutX="467.0" layoutY="491.0" mnemonicParsing="false" onAction="#closeGestionFicheClient" prefHeight="41.0" prefWidth="177.0" text="QUITTER" />
+</Pane>
