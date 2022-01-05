@@ -14,7 +14,7 @@ public class DBConnex {
 
 	public static Connection getConn(){
 		try{
-			return DriverManager.getConnection("jdbc:mysql://10.100.0.5:3306/jdelmas_ap32","jdelmas","jdelmas");
+			return DriverManager.getConnection("jdbc:mysql://localhost/ap_meetingsbooker","root","");
 		}catch (SQLException e){
 			e.printStackTrace();
 		}

@@ -53,6 +53,9 @@ public class ControllerIdentification extends ControllerBase implements Initiali
 				if(utilisateur.getFonction().equals("ADMIN") || utilisateur.getLogin().equals("RESPONSABLE")){
 					LoadScene.load(e, getClass().getResource("/fxml/view-commerciaux-liste.fxml"));
 				}
+				else if(utilisateur.getFonction().equals("COMMERCIAL")){
+					LoadScene.load(e, getClass().getResource("/fxml/view-client-fiche.fxml"));
+				}
 				else{
 					messageConnexionLabel.setText("Vous n'avez pas la permission d'accèder à cette page.");
 				}
